@@ -1,0 +1,5 @@
+.editorconfig
+Maripiell.Services.CouponAPI/bin
+Maripiell.Services.CouponAPI/obj
+.vs
+.github
