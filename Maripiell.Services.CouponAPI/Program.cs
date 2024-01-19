@@ -13,6 +13,19 @@ builder.Services.AddDbContext<CouponDBContext>(options =>
 
 builder.Services.AddRespositories();
 
+var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>() ?? [];
+
+// Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myAppCors", policy =>
+    {
+        policy.WithOrigins(allowedOrigin)
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddSingleton(MapperConfig.RegisterMaps().CreateMapper());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -27,6 +40,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors("myAppCors");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
