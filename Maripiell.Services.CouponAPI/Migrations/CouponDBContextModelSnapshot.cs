@@ -52,7 +52,7 @@ namespace Maripiell.Services.CouponAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Coupons", (string)null);
 
                     b.HasData(
                         new

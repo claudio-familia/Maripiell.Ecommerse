@@ -1,4 +1,4 @@
-﻿namespace Maripiell.Services.CouponAPI.Domain.Contracts
+﻿namespace Maripiell.Common.Common.Domain.Contracts
 {
     public interface IAudityEntity
     {

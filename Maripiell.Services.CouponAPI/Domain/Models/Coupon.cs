@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Maripiell.Common.Common.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Maripiell.Services.CouponAPI.Domain.Models
 {

@@ -1,0 +1,6 @@
+@Maripiell.Services.AuthAPI_HostAddress = http://localhost:5167
+
+GET {{Maripiell.Services.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

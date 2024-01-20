@@ -1,5 +1,6 @@
 using AutoMapper;
-using Maripiell.Services.CouponAPI.DataAccess.Repositories.Contracts;
+using Maripiell.Common.Common.DataAccess.Repositories.Contracts;
+using Maripiell.Services.CouponAPI.DataAccess;
 using Maripiell.Services.CouponAPI.Domain.Dto;
 using Maripiell.Services.CouponAPI.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,10 @@ namespace Maripiell.Services.CouponAPI.Controllers
     [Route("[controller]")]
     public class CouponController : ControllerBase
     {
-        private readonly IBaseRepository<Coupon> _baseRepository;
+        private readonly IBaseRepository<Coupon, CouponDBContext> _baseRepository;
         private readonly IMapper mapper;
 
-        public CouponController(IBaseRepository<Coupon> baseRepository, IMapper mapper)
+        public CouponController(IBaseRepository<Coupon, CouponDBContext> baseRepository, IMapper mapper)
         {
             _baseRepository = baseRepository;
             this.mapper = mapper;

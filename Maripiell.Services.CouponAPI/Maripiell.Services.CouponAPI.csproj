@@ -24,4 +24,8 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Maripiell.Common.Common\Maripiell.Common.Common.csproj" />
+  </ItemGroup>
+
 </Project>

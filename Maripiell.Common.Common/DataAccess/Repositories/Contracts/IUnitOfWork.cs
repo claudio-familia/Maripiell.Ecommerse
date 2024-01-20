@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Maripiell.Services.CouponAPI.DataAccess.Repositories.Contracts
+namespace Maripiell.Common.Common.DataAccess.Repositories.Contracts
 {
     public interface IUnitOfWork
     {

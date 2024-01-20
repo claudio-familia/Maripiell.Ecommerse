@@ -1,13 +1,14 @@
-﻿using Maripiell.Services.CouponAPI.DataAccess.Repositories.Contracts;
+﻿using Maripiell.Common.Common.DataAccess.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Maripiell.Services.CouponAPI.DataAccess.Repositories
+namespace Maripiell.Common.Common.DataAccess.Repositories
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork<CT> : IUnitOfWork, IDisposable where CT : DbContext
     {
-        private readonly CouponDBContext _DataContext;
+        private readonly CT _DataContext;
 
-        public UnitOfWork(CouponDBContext dataContext)
+        public UnitOfWork(CT dataContext)
         {
             _DataContext = dataContext;
         }

@@ -1,7 +1,7 @@
-﻿using Maripiell.Services.CouponAPI.Domain.Contracts;
+﻿using Maripiell.Common.Common.Domain.Contracts;
 using System.ComponentModel.DataAnnotations;
 
-namespace Maripiell.Services.CouponAPI.Domain.Models
+namespace Maripiell.Common.Common.Domain.Models
 {
     public class BaseEntity: IAudityEntity
     {

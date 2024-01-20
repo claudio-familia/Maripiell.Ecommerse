@@ -1,13 +1,15 @@
-﻿using Maripiell.Services.CouponAPI.DataAccess.Repositories.Contracts;
-using Maripiell.Services.CouponAPI.Domain.Contracts;
+﻿using Maripiell.Common.Common.DataAccess.Repositories.Contracts;
+using Maripiell.Common.Common.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace Maripiell.Services.CouponAPI.DataAccess.Repositories
+namespace Maripiell.Common.Common.DataAccess.Repositories
 {
-    public class BaseRepository<T>(CouponDBContext context) : IBaseRepository<T> where T : class, IAudityEntity
+    public class BaseRepository<T, CT>(CT context) : IBaseRepository<T, CT> 
+        where T : class, IAudityEntity
+        where CT : DbContext
     {
         private readonly DbSet<T> _DbSet = context.Set<T>();
-        private readonly CouponDBContext _context = context;
+        private readonly CT _context = context;
 
         public T Add(T entity)
         {
@@ -35,7 +37,7 @@ namespace Maripiell.Services.CouponAPI.DataAccess.Repositories
             return _DbSet.AsNoTracking().Where(x => x.IsDeleted == false).ToList();
         }
 
-        public T GetById(int id)
+        public T? GetById(int id)
         {
             return _DbSet.Find(id);
         }

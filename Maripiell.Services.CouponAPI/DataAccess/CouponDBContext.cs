@@ -1,7 +1,6 @@
-﻿using Maripiell.Services.CouponAPI.Domain.Contracts;
+﻿using Maripiell.Common.Common.Domain.Contracts;
 using Maripiell.Services.CouponAPI.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Maripiell.Services.CouponAPI.DataAccess
 {

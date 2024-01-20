@@ -2,5 +2,9 @@
 Maripiell.Services.CouponAPI/bin
 Maripiell.Services.CouponAPI/obj
 Maripiell.Ecommerse/.vscode
+Maripiell.Services.AuthAPI/bin
+Maripiell.Services.AuthAPI/obj
+Maripiell.Common.Common/bin
+Maripiell.Common.Common/obj
 .vs
 .github
