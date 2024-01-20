@@ -1,0 +1,9 @@
+<div class="mat-elevation-z8">
+    <mat-card class="p1">
+      <div class="space-between">
+        <h2 class="mat-headline-5">{{title}}</h2>
+        <button mat-raised-button color="primary" [routerLink]="routeTo">{{routeText}}</button>
+      </div>
+      <ng-content></ng-content>
+    </mat-card>
+</div>

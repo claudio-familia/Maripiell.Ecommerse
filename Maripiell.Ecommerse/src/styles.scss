@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.p1 {
+    padding: 1rem;
+}
+
+.space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.space-between-1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: end;
+}
+
+.form__control {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    width: 100%;
+    input {
+        padding: 0.5rem;
+        border: 0.125rem solid lightgray;
+
+        &:focus, &:active {
+            outline: none;
+            border: 0.125rem solid #673ab7;
+        }
+    }
+}
