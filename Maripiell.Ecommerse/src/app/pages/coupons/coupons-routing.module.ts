@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: "create",
     component: CouponFormComponent
+  },
+  {
+    path: "edit/:id",
+    component: CouponFormComponent
   }
 ];
 

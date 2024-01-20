@@ -1,1 +1,21 @@
-<p>form works!</p>
+<mall-page title="Create coupon" [routeTo]="isEdit ? '/coupons' : '..'" routeText="Go back to coupons">
+    <form [formGroup]="couponForm" (ngSubmit)="submitCoupon()">
+        <div class="space-between-1">
+            <div class="form__control">
+                <Label for="code">Coupon code</Label>
+                <input type="text" id="code" name="code" formControlName="code" placeholder="Digit coupon code" />
+            </div>
+            <div class="form__control">
+                <Label for="discountAmount">Discount Amount</Label>
+                <input type="number" id="discountAmount" name="discountAmount" formControlName="discountAmount" placeholder="Digit the discount amount" />
+            </div>
+        </div>
+        <div class="form__control">
+            <Label for="minAmount">Minimal Amount</Label>
+            <input type="number" id="minAmount" name="minAmount" formControlName="minAmount" placeholder="Digit the min amount" />
+        </div>
+        <div class="flex-end">
+            <button mat-raised-button color="primary">{{isEdit ? "Update" : "Create"}}</button>
+        </div>
+    </form>
+</mall-page>

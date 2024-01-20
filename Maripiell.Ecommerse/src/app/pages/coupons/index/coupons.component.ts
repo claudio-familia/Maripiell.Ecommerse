@@ -18,7 +18,7 @@ export class CouponsComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   dataSource?: CouponsDataSource = new CouponsDataSource([]);
 
-  displayedColumns = ['id', 'code', 'discountAmount', 'minAmount'];
+  displayedColumns = ['id', 'code', 'discountAmount', 'minAmount', 'action'];
 
   nameColumns: any = {
     id: 'ID',
@@ -35,6 +35,10 @@ export class CouponsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getData();
+  }
+
+  getData(): void {
     this.subscription.add(
       this.http
         .get<CouponsItem[]>('https://localhost:7001/Coupon')
@@ -52,5 +56,13 @@ export class CouponsComponent implements OnInit, OnDestroy {
       this.dataSource.paginator = this.paginator;
       this.table.dataSource = this.dataSource;
     }
+  }
+
+  deleteCoupon(id: number) {
+    console.log('deleteCoupon', id)
+    this.http.delete<CouponsItem>('https://localhost:7001/Coupon/'+id).subscribe(data => {
+      console.log(data);
+      this.getData();
+    });
   }
 }
