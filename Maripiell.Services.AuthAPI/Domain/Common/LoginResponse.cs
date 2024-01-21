@@ -2,9 +2,9 @@
 
 namespace Maripiell.Services.AuthAPI.Domain.Common
 {
-    public class LoginResponse
+    public class LoginResponse(LoginDto user, string token)
     {
-        public UserDto? User { get; set; }
-        public string Token { get; set; }
+        public LoginDto? User { get; set; } = user;
+        public string Token { get; set; } = token;
     }
 }

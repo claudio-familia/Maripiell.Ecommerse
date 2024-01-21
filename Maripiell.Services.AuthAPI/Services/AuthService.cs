@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Maripiell.Common.Common.Domain.Common;
+using Maripiell.Services.AuthAPI.DataAccess.Repositories.Contracts;
 using Maripiell.Services.AuthAPI.Domain.Common;
 using Maripiell.Services.AuthAPI.Domain.Dto;
 using Maripiell.Services.AuthAPI.Domain.Models;
@@ -11,16 +13,26 @@ namespace Maripiell.Services.AuthAPI.Services
     {
         private readonly UserManager<User> userService;
         private readonly IMapper mapper;
+        private readonly IUserRepository userRepository;
 
-        public AuthService(UserManager<User> userService, IMapper mapper)
+        public AuthService(UserManager<User> userService, IMapper mapper, IUserRepository userRepository)
         {
             this.userService = userService;
             this.mapper = mapper;
+            this.userRepository = userRepository;
         }
 
-        public Task<LoginResponse> Login(LoginUser user)
+        public async Task<LoginResponse> Login(LoginUser user)
         {
-            throw new NotImplementedException();
+            var currentUser = userRepository.GetByEmailOrUsername(user.Username) ?? throw new CustomError("User not found");
+
+            if (await userService.CheckPasswordAsync(currentUser, user.Password))
+            {
+                return new LoginResponse(mapper.Map<LoginDto>(currentUser), "");
+            }
+
+            throw new CustomError("Invalid Credentials");
+
         }
 
         public async Task<UserDto> Register(UserDto user)
@@ -30,7 +42,7 @@ namespace Maripiell.Services.AuthAPI.Services
 
             if(!response.Succeeded || response.Errors.Any())
             {
-                throw new Exception(response.Errors.ToString());
+                throw new CustomError(AuthIdentityErrorResult.ToString(response.Errors));
             }
 
             return user;

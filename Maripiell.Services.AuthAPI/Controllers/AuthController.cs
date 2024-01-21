@@ -1,3 +1,4 @@
+using Maripiell.Services.AuthAPI.Domain.Common;
 using Maripiell.Services.AuthAPI.Domain.Dto;
 using Maripiell.Services.AuthAPI.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,9 @@ namespace Maripiell.Services.AuthAPI.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginUser user)
         {
-            return Ok();
+            return Ok(await authService.Login(user));
         }
 
         [HttpPost("Register")]

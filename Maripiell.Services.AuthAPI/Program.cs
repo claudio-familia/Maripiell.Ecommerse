@@ -1,4 +1,6 @@
+using Maripiell.Common.Common.Middlewares;
 using Maripiell.Services.AuthAPI.DataAccess;
+using Maripiell.Services.AuthAPI.DataAccess.Configuration;
 using Maripiell.Services.AuthAPI.Domain.Models;
 using Maripiell.Services.AuthAPI.Services;
 using Maripiell.Services.AuthAPI.Services.Contracts;
@@ -14,7 +16,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("Default") ?? "");
 });
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
-
+builder.Services.AddRespositories();
 builder.Services.AddSingleton(MapperConfig.RegisterMaps().CreateMapper());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -33,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>("AuthAPI");
 
 app.UseHttpsRedirection();
 
