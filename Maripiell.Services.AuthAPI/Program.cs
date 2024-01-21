@@ -1,6 +1,7 @@
 using Maripiell.Common.Common.Middlewares;
 using Maripiell.Services.AuthAPI.DataAccess;
 using Maripiell.Services.AuthAPI.DataAccess.Configuration;
+using Maripiell.Services.AuthAPI.Domain.Common;
 using Maripiell.Services.AuthAPI.Domain.Models;
 using Maripiell.Services.AuthAPI.Services;
 using Maripiell.Services.AuthAPI.Services.Contracts;
@@ -16,11 +17,15 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("Default") ?? "");
 });
 builder.Services.AddIdentity<User, Role>().AddEntityFrameworkStores<AuthDbContext>().AddDefaultTokenProviders();
+
+builder.Services.Configure<AuthSettings>(builder.Configuration.GetSection("AuthSettings"));
 builder.Services.AddRespositories();
+
 builder.Services.AddSingleton(MapperConfig.RegisterMaps().CreateMapper());
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddSingleton<IJWTGeneratorService, JWTGeneratorService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

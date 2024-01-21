@@ -1,7 +1,9 @@
-﻿namespace Maripiell.Services.AuthAPI.Services.Contracts
+﻿using Maripiell.Services.AuthAPI.Domain.Models;
+
+namespace Maripiell.Services.AuthAPI.Services.Contracts
 {
     public interface IJWTGeneratorService
     {
-        Task<string> GenerateTokenAsync(string token);
+        string GenerateToken(User token);
     }
 }

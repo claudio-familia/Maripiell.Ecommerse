@@ -14,12 +14,18 @@ namespace Maripiell.Services.AuthAPI.Services
         private readonly UserManager<User> userService;
         private readonly IMapper mapper;
         private readonly IUserRepository userRepository;
+        private readonly IJWTGeneratorService generatorService;
 
-        public AuthService(UserManager<User> userService, IMapper mapper, IUserRepository userRepository)
+        public AuthService(
+            UserManager<User> userService,
+            IMapper mapper,
+            IUserRepository userRepository,
+            IJWTGeneratorService generatorService)
         {
             this.userService = userService;
             this.mapper = mapper;
             this.userRepository = userRepository;
+            this.generatorService = generatorService;
         }
 
         public async Task<LoginResponse> Login(LoginUser user)
@@ -28,7 +34,7 @@ namespace Maripiell.Services.AuthAPI.Services
 
             if (await userService.CheckPasswordAsync(currentUser, user.Password))
             {
-                return new LoginResponse(mapper.Map<LoginDto>(currentUser), "");
+                return new LoginResponse(mapper.Map<LoginDto>(currentUser), generatorService.GenerateToken(currentUser));
             }
 
             throw new CustomError("Invalid Credentials");
